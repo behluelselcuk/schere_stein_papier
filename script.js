@@ -33,11 +33,7 @@ function getHumanChoice() {
 }
 
 // Punktevariablen deklarieren
-
-
-// Die Schritte werden wiederholt, bis jemand drei Punkte erreicht
-function playGame() {
-    let humanScore = 0;
+let humanScore = 0;
 let computerScore = 0;
 
 // Logik zum Spielen einer Runde
@@ -88,6 +84,10 @@ const humanSelection = getHumanChoice();
 const computerSelection = getComputerChoice();
 
 playRound(humanSelection, computerSelection);
+
+// Die Schritte werden wiederholt, bis jemand drei Punkte erreicht
+function playGame() {
+    
 }
 
 // Wer als erstes 3 Punkte erreicht, hat gewonnen
