@@ -32,7 +32,62 @@ function getHumanChoice() {
     }
 }
 
-// Der Gewinner wird ausgewertet
-// Der Gewinner erhält einen Punkt
+// Punktevariablen deklarieren
+
+
 // Die Schritte werden wiederholt, bis jemand drei Punkte erreicht
+function playGame() {
+    let humanScore = 0;
+let computerScore = 0;
+
+// Logik zum Spielen einer Runde
+// Der Runden-Gewinner wird ausgewertet und erhält einen Punkt
+function playRound(humanChoice, computerChoice) {
+    // humanCoice === Stein
+    if (humanChoice === 'Stein' && computerChoice === 'Schere') {
+        humanScore++;
+        console.log('Du gewinnst! Stein schlägt Schere.');
+    }
+    else if (humanChoice === 'Stein' && computerChoice === 'Papier') {
+        computerScore++;
+        console.log('Du verlierst! Papier schlägt Stein.');
+    }
+    else if (humanChoice === 'Stein' && computerChoice === 'Stein') {
+        console.log('Stein und Stein sorgen für unentschieden! Keiner erhält einen Punkt.');
+    }
+    // humanChoice === Papier
+    else if (humanChoice === 'Papier' && computerChoice === 'Stein') {
+        humanScore++;
+        console.log('Du gewinnst! Papier schlägt Stein.');
+    }
+    else if (humanChoice === 'Papier' && computerChoice === 'Schere') {
+        computerScore++;
+        console.log('Du verlierst! Schere schlägt Papier.');
+    }
+    else if (humanChoice === 'Papier' && computerChoice === 'Papier') {
+        console.log('Papier und Papier sorgen für unentschieden! Keiner erhält einen Punkt.');
+    }
+    // humanChoice === Schere
+    else if (humanChoice === 'Schere' && computerChoice === 'Papier') {
+        humanScore++;
+        console.log('Du gewinnst! Schere schlägt Papier.');
+    }
+    else if (humanChoice === 'Schere' && computerChoice === 'Stein') {
+        computerScore++;
+        console.log('Du verlierst! Stein schlägt Schere,');
+    }
+    else if (humanChoice === 'Schere' && computerChoice === 'Schere') {
+        console.log('Schere und Schere sorgen für unentschieden! Keiner erhält einen Punkt.');
+    }
+    else {
+        alert('Deine Eingabe ist nicht gültig!');
+    }
+}
+
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
+
+playRound(humanSelection, computerSelection);
+}
+
 // Wer als erstes 3 Punkte erreicht, hat gewonnen
