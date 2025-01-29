@@ -1,119 +1,121 @@
 'use strict';
 
-// Der Computer trifft eine zufällige Auswahl
+// Elemente aus dem HTML-Dokument auswählen
+const rockBtn = document.querySelector('#rockBtn');
+const paperBtn = document.querySelector('#paperBtn');
+const scissorBtn = document.querySelector('#scissorBtn');
+const resultsDiv = document.querySelector('#results');
+const playerScoreText = document.querySelector('#playerScore');
+const computerScoreText = document.querySelector('#computerScore');
+const winnerDiv = document.querySelector('#winner');
+const resetBtn = document.querySelector('#resetBtn');
+
+// Punktestände initialisieren
+let humanScore = 0;
+let computerScore = 0;
+
+// Funktion: Computer trifft eine zufällige Auswahl
 function getComputerChoice() {
-    let randomNumber = Math.random();
-
-    if (randomNumber <= 1/3) {
+    const randomNumber = Math.random();
+    if (randomNumber < 1 / 3) {
         return 'Stein';
-    }
-    else if (randomNumber <= 2/3) {
+    } else if (randomNumber < 2 / 3) {
         return 'Papier';
-    }
-    else {
+    } else {
         return 'Schere';
     }
 }
 
-// Der Spieler trifft eine Auswahl
-function getHumanChoice() {
-    let choice = prompt('Wähle zwischen Stein, Papier oder Schere aus und gib es in das Eingabefeld ein:').toLowerCase();
-    if (choice === 'stein') {
-        return 'Stein';
-    }
-    else if (choice === 'papier') {
-        return 'Papier';
-    }
-    else if (choice === 'schere') {
-        return 'Schere';
-    }
-    else {
-        return 'Das ist keine gültige Eingabe!';
+// Funktion: Gewinner überprüfen
+function checkWinner() {
+    if (humanScore === 5) {
+        winnerDiv.textContent = 'Herzlichen Glückwunsch! Du hast das Spiel gewonnen!';
+        endGame();
+    } else if (computerScore === 5) {
+        winnerDiv.textContent = 'Schade! Der Computer hat das Spiel gewonnen.';
+        endGame();
     }
 }
 
+// Funktion: Spiel beenden
+function endGame() {
+    rockBtn.disabled = true;
+    paperBtn.disabled = true;
+    scissorBtn.disabled = true;
+    resetBtn.style.display = 'block'; // Neustart-Button einblenden
+}
 
+// Funktion: Spiel zurücksetzen
+resetBtn.addEventListener('click', () => {
+    // Punktestände zurücksetzen
+    humanScore = 0;
+    computerScore = 0;
 
-// Die Schritte werden wiederholt, bis jemand drei Punkte erreicht
-function playGame() {
-    // Punktevariablen deklarieren
-    let humanScore = 0;
-    let computerScore = 0;
+    // Texte zurücksetzen
+    playerScoreText.textContent = 'Player score: 0';
+    computerScoreText.textContent = 'Computer score: 0';
+    resultsDiv.textContent = '';
+    winnerDiv.textContent = '';
 
-    // result-div auswählen
-    let resultsDiv = document.querySelector('#results');
+    // Buttons wieder aktivieren
+    rockBtn.disabled = false;
+    paperBtn.disabled = false;
+    scissorBtn.disabled = false;
 
-    // Logik zum Spielen einer Runde
-    // Der Runden-Gewinner wird ausgewertet und erhält einen Punkt
-    function playRound(humanChoice, computerChoice) {
-        // humanCoice === Stein
-        if (humanChoice === 'Stein' && computerChoice === 'Schere') {
-            humanScore++;
-            resultsDiv.textContent = 'Du gewinnst! Stein schlägt Schere.';
-        }
-        else if (humanChoice === 'Stein' && computerChoice === 'Papier') {
-            computerScore++;
-            resultsDiv.textContent = 'Du verlierst! Papier schlägt Stein.';
-        }
-        else if (humanChoice === 'Stein' && computerChoice === 'Stein') {
-            resultsDiv.textContent = 'Stein und Stein sorgen für unentschieden! Keiner erhält einen Punkt.';
-        }
-        // humanChoice === Papier
-        else if (humanChoice === 'Papier' && computerChoice === 'Stein') {
-            humanScore++;
-            resultsDiv.textContent = 'Du gewinnst! Papier schlägt Stein.';
-        }
-        else if (humanChoice === 'Papier' && computerChoice === 'Schere') {
-            computerScore++;
-            resultsDiv.textContent = 'Du verlierst! Schere schlägt Papier.';
-        }
-        else if (humanChoice === 'Papier' && computerChoice === 'Papier') {
-            resultsDiv.textContent = 'Papier und Papier sorgen für unentschieden! Keiner erhält einen Punkt.';
-        }
-        // humanChoice === Schere
-        else if (humanChoice === 'Schere' && computerChoice === 'Papier') {
-            humanScore++;
-            resultsDiv.textContent = 'Du gewinnst! Schere schlägt Papier.';
-        }
-        else if (humanChoice === 'Schere' && computerChoice === 'Stein') {
-            computerScore++;
-            resultsDiv.textContent = 'Du verlierst! Stein schlägt Schere,';
-        }
-        else if (humanChoice === 'Schere' && computerChoice === 'Schere') {
-            resultsDiv.textContent = 'Schere und Schere sorgen für unentschieden! Keiner erhält einen Punkt.';
-        }
+    // Neustart-Button ausblenden
+    resetBtn.style.display = 'none';
+});
+
+// Funktion: Eine Runde spielen
+function playRound(humanChoice, computerChoice) {
+    if (humanChoice === 'Stein' && computerChoice === 'Schere') {
+        humanScore++;
+        playerScoreText.textContent = `Player score: ${humanScore}`;
+        resultsDiv.textContent = 'Du gewinnst! Stein schlägt Schere.';
+    } else if (humanChoice === 'Stein' && computerChoice === 'Papier') {
+        computerScore++;
+        computerScoreText.textContent = `Computer score: ${computerScore}`;
+        resultsDiv.textContent = 'Du verlierst! Papier schlägt Stein.';
+    } else if (humanChoice === 'Stein' && computerChoice === 'Stein') {
+        resultsDiv.textContent = 'Unentschieden! Stein und Stein sorgen für keinen Punkt.';
+    } else if (humanChoice === 'Papier' && computerChoice === 'Stein') {
+        humanScore++;
+        playerScoreText.textContent = `Player score: ${humanScore}`;
+        resultsDiv.textContent = 'Du gewinnst! Papier schlägt Stein.';
+    } else if (humanChoice === 'Papier' && computerChoice === 'Schere') {
+        computerScore++;
+        computerScoreText.textContent = `Computer score: ${computerScore}`;
+        resultsDiv.textContent = 'Du verlierst! Schere schlägt Papier.';
+    } else if (humanChoice === 'Papier' && computerChoice === 'Papier') {
+        resultsDiv.textContent = 'Unentschieden! Papier und Papier sorgen für keinen Punkt.';
+    } else if (humanChoice === 'Schere' && computerChoice === 'Papier') {
+        humanScore++;
+        playerScoreText.textContent = `Player score: ${humanScore}`;
+        resultsDiv.textContent = 'Du gewinnst! Schere schlägt Papier.';
+    } else if (humanChoice === 'Schere' && computerChoice === 'Stein') {
+        computerScore++;
+        computerScoreText.textContent = `Computer score: ${computerScore}`;
+        resultsDiv.textContent = 'Du verlierst! Stein schlägt Schere.';
+    } else if (humanChoice === 'Schere' && computerChoice === 'Schere') {
+        resultsDiv.textContent = 'Unentschieden! Schere und Schere sorgen für keinen Punkt.';
     }
 
-    // HTML-Buttons auswählen
-    let rockBtn = document.querySelector('#rockBtn');
-    let paperBtn = document.querySelector('#paperBtn');
-    let scissorBtn = document.querySelector('#scissorBtn');
-
-    // Event-Listener für die Buttons
-    rockBtn.addEventListener('click', () => {
-        const computerSelection = getComputerChoice();
-        playRound('Stein', computerSelection);
-    });
-
-    paperBtn.addEventListener('click', () => {
-        const computerSelection = getComputerChoice();
-        playRound('Papier', computerSelection);
-    });
-
-    scissorBtn.addEventListener('click', () => {
-        const computerSelection = getComputerChoice();
-        playRound('Schere', computerSelection);
-    });
-
-
-    // for (let i = 0; i < 5; i++) {
-    //     const humanSelection = getHumanChoice();
-    //     const computerSelection = getComputerChoice();
-    //     playRound(humanSelection, computerSelection);
-    // }
-
+    // Gewinner überprüfen
+    checkWinner();
 }
-playGame();
 
+// Event-Listener für die Buttons
+rockBtn.addEventListener('click', () => {
+    const computerSelection = getComputerChoice();
+    playRound('Stein', computerSelection);
+});
 
-// Wer als erstes 3 Punkte erreicht, hat gewonnen
+paperBtn.addEventListener('click', () => {
+    const computerSelection = getComputerChoice();
+    playRound('Papier', computerSelection);
+});
+
+scissorBtn.addEventListener('click', () => {
+    const computerSelection = getComputerChoice();
+    playRound('Schere', computerSelection);
+});
