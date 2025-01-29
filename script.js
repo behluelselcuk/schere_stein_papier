@@ -84,11 +84,33 @@ function playGame() {
         }
     }
 
-    for (let i = 0; i < 5; i++) {
-        const humanSelection = getHumanChoice();
+    // HTML-Buttons auswählen
+    let rockBtn = document.querySelector('#rockBtn');
+    let paperBtn = document.querySelector('#paperBtn');
+    let scissorBtn = document.querySelector('#scissorBtn');
+
+    // Event-Listener für die Buttons
+    rockBtn.addEventListener('click', () => {
         const computerSelection = getComputerChoice();
-        playRound(humanSelection, computerSelection);
-    }
+        playRound('Stein', computerSelection);
+    });
+
+    paperBtn.addEventListener('click', () => {
+        const computerSelection = getComputerChoice();
+        playRound('Papier', computerSelection);
+    });
+
+    scissorBtn.addEventListener('click', () => {
+        const computerSelection = getComputerChoice();
+        playRound('Schere', computerSelection);
+    });
+
+
+    // for (let i = 0; i < 5; i++) {
+    //     const humanSelection = getHumanChoice();
+    //     const computerSelection = getComputerChoice();
+    //     playRound(humanSelection, computerSelection);
+    // }
 
 }
 playGame();
