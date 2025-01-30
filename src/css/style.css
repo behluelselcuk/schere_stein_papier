@@ -2,6 +2,8 @@ body {
     margin: 0;
     padding: 0;
     font-size: 32px;
+    background-color: rgb(80, 74, 74);
+
 }
 
 
@@ -21,21 +23,66 @@ h1 {
 /* === MAIN === */
 
 main {
-    background-color: rgb(80, 74, 74);
     text-align: center;
     padding: 1em;
 }
 
 .buttons {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 2em;
     align-items: center;
     padding: 1em .5em;
+}
+
+img {
+    width: 300px;
+    height: auto;
 }
 
 #resetBtn {
     margin: 0 auto;
     font-size: 1em;
     background-color: rgb(34, 30, 30);
-    color: git pushrgb(226, 12, 12);
+    color: rgb(226, 12, 12);
+}
+
+
+
+/* === RESPONSIVE DESIGN === */
+
+@media (max-width: 1160px) {
+    
+    img {
+        width: 250px;
+    }
+
+}
+
+@media (max-width: 995px) {
+
+    img {
+        width: 200px;
+    }
+
+    .buttons {
+        flex-wrap: wrap;
+    }
+
+}
+
+@media (max-width: 596px) {
+
+    img {
+        width: 150px;
+    }
+
+}
+
+@media (max-width: 492px) {
+
+    img {
+        width: 100px;
+    }
+
 }
