@@ -1,0 +1,41 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 32px;
+}
+
+
+
+/* === HEAD === */
+
+h1 {
+    background-color: rgb(34, 30, 30);
+    color: rgb(226, 12, 12);
+    text-align: center;
+    margin: 0;
+    padding: 1em .5em;
+}
+
+
+
+/* === MAIN === */
+
+main {
+    background-color: rgb(80, 74, 74);
+    text-align: center;
+    padding: 1em;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1em .5em;
+}
+
+#resetBtn {
+    margin: 0 auto;
+    font-size: 1em;
+    background-color: rgb(34, 30, 30);
+    color: rgb(226, 12, 12);
+}

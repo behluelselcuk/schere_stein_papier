@@ -4,21 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stein Papier Schere</title>
+    <link rel="stylesheet" href="./src/css/style.css">
 </head>
 <body>
-    <button id="rockBtn"></button>
-    <button id="paperBtn"></button>
-    <button id="scissorBtn"></button>
+    <head>
+        <h1>ROCK PAPER SCISSORS</h1>
+    </head>
 
-    <div id="results"></div>
+    <main>
+        <div class="buttons">
+            <button id="rockBtn"><img src="./src/images/Stein.png" alt="Eine Faust"></button>
+            <button id="paperBtn"><img src="./src/images/Papier.png" alt="Eine offene Hand"></button>
+            <button id="scissorBtn"><img src="./src/images/Schere.png" alt="Eine Hand, die eine Schere zeigt"></button>
+        </div>
+        
+        <div id="results"></div>
 
-    <div id="scores">
-        <p id="playerScore">Player score: 0</p>
-        <p id="computerScore">Computer score: 0</p>
-        <p id="winner"></p>
-    </div>
+        <div id="scores">
+            <p id="playerScore">Player score: 0</p>
+            <p id="computerScore">Computer score: 0</p>
+            <p id="winner"></p>
+        </div>
 
-    <button id="resetBtn" style="display: none;">Neustart</button>
+        <button id="resetBtn" style="display: none;">Neustart</button>
+    </main>
 
     <script src="script.js"></script>
 </body>
